@@ -460,6 +460,7 @@ export class TuyaWebPlatform implements DynamicPlatformPlugin {
       const identifiers = deviceList.findAll(toDisallowAccessoryIdentifier);
       if (Array.isArray(identifiers) && identifiers.length) {
         hiddenAccessoryIdentifiers.push(...identifiers);
+        this.log.warn(`ignoring ${toDisallowAccessoryIdentifier}`);
         continue;
       }
 
