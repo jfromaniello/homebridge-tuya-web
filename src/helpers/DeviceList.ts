@@ -27,6 +27,11 @@ export class DeviceList {
     return undefined;
   }
 
+  public findAll(name: string): string[] {
+    return Object.keys(this.idNameMap)
+      .filter((key) => this.idNameMap[key] === name);
+  }
+
   /**
    * Returns all device ids in this list
    */

@@ -292,7 +292,7 @@ export class TuyaWebPlatform implements DynamicPlatformPlugin {
       if (
         device.config?.old_dev_type &&
         device.config.old_dev_type.toLowerCase() !==
-          device.dev_type.toLowerCase()
+        device.dev_type.toLowerCase()
       ) {
         this.log.info(
           'Device type for "%s" is overruled in config from %s to: "%s"',
@@ -456,6 +456,13 @@ export class TuyaWebPlatform implements DynamicPlatformPlugin {
 
     for (const toDisallowAccessoryIdentifier of this.config
       .hiddenAccessories as string[]) {
+
+      const identifiers = deviceList.findAll(toDisallowAccessoryIdentifier);
+      if (Array.isArray(identifiers) && identifiers.length) {
+        hiddenAccessoryIdentifiers.push(...identifiers);
+        continue;
+      }
+
       const deviceIdentifier = deviceList.find(toDisallowAccessoryIdentifier);
       if (deviceIdentifier) {
         hiddenAccessoryIdentifiers.push(deviceIdentifier);
